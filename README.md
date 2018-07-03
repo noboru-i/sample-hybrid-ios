@@ -8,5 +8,5 @@ Sample of using WKWebView.
 - Add javascript interface.
 - Set cookie at loading.
 - Set cookie header with request.
-- Open safari when loading outside domein.
+- Open safari when loading outside domain.
 - Allow Self-signed certificate. (for using Charles.)
