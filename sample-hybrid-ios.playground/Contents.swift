@@ -33,7 +33,7 @@ class MyViewController : UIViewController {
         view.addSubview(webView)
 
         let button = UIButton(frame: CGRect(x: 0, y: 400, width: 200, height: 44))
-        button.setTitle("exec", for: .normal)
+        button.setTitle("add native cookie", for: .normal)
         button.backgroundColor = UIColor.black
         button.addTarget(self, action:#selector(self.buttonClicked), for: .touchUpInside)
         view.addSubview(button)
