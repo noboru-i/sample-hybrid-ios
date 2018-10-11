@@ -8,6 +8,10 @@ class MyViewController : UIViewController {
     private var webView: WKWebView!
 
     override func loadView() {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.white
+        self.view = view
+
         let configuration = WKWebViewConfiguration()
 
         // add javascript interface
@@ -24,9 +28,15 @@ class MyViewController : UIViewController {
                                         forMainFrameOnly: true)
         controller.addUserScript(cookieScript)
 
-        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: 320, height: 400), configuration: configuration)
         webView.navigationDelegate = self
-        view = webView
+        view.addSubview(webView)
+
+        let button = UIButton(frame: CGRect(x: 0, y: 400, width: 200, height: 44))
+        button.setTitle("exec", for: .normal)
+        button.backgroundColor = UIColor.black
+        button.addTarget(self, action:#selector(self.buttonClicked), for: .touchUpInside)
+        view.addSubview(button)
     }
 
     override func viewDidLoad() {
@@ -39,6 +49,12 @@ class MyViewController : UIViewController {
         request.addValue("requestKey=sample", forHTTPHeaderField: "Cookie")
 
         webView.load(request)
+    }
+
+    @objc func buttonClicked() {
+        print("Button Clicked")
+        webView.evaluateJavaScript("document.cookie = 'native_cookie=xyz;max-age=3600;path=/';", completionHandler: nil)
+        webView.evaluateJavaScript("printCookie();", completionHandler: nil)
     }
 }
 
