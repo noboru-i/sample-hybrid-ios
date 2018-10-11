@@ -62,6 +62,10 @@ extension MyViewController : WKNavigationDelegate {
         webView.configuration.websiteDataStore.httpCookieStore.getAllCookies {
             print($0)
         }
+        if(url.absoluteString == "sample://update_cookie") {
+            decisionHandler(.cancel)
+            return
+        }
         if(url.host! == "noboru-i.github.io") {
             decisionHandler(.allow)
             return
